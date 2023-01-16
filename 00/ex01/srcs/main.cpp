@@ -1,15 +1,21 @@
-#include "../phonebook.hpp"
+#include "../PhoneBook.hpp"
 
 int		main()
 {
-	contact contact, contact2;
-	
+	PhoneBook	phonebook;
+	bool		exit = false;
+	str			input;
 
-	contact.Add_FirstName("Henrique");
-	contact.Add_LastName("Grebin");
-	contact.Add_Nickname("Grebinolas");
-	contact.Add_PhoneNum("961408273");
-	contact.Add_Secret("NULL");
 
-	contact.Print_All();
+	while (exit == false)
+	{
+		std::cin >> input;
+		if (!input.compare("ADD"))
+			phonebook.ADD();
+		if (!input.compare("SEARCH"))
+			phonebook.SEARCH();
+		if (!input.compare("EXIT"))
+			exit = true;
+	}
+	std::cout << "EXIT SELECTED\n";
 }

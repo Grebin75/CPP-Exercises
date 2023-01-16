@@ -1,8 +1,8 @@
-SRCS = srcs/phonebook.cpp \
-		srcs/contacts.cpp \
+SRCS = srcs/PhoneBook.cpp \
+		srcs/Contacts.cpp \
 		srcs/main.cpp \
 
-FLAGS = -Werror -Wall -Wextra -std=c++98  -g -fsanitize=address 
+FLAGS = -Werror -Wall -Wextra -std=c++98  -g -fsanitize=address
 CC = c++
 RM = rm -rf
 NAME = phonebook

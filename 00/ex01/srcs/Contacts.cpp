@@ -41,7 +41,7 @@ str	Contact::Ident_Info(str info)
 	{
 		temp = info;
 		while (temp.length() < 10)
-			temp.insert(temp.length(), " ");
+			temp.insert(0, " ");
 	}
 	return temp;
 
@@ -65,13 +65,22 @@ bool	Contact::Full()
 	return (true);
 }
 
-void	Contact::Print_Contact()
-{
+void	Contact::Print_Contact() {
+	str input;
+
 	system("clear");
 	std::cout << "First Name: " << this->Frist_Name << std::endl;
 	std::cout << "Last Name: " << this->Last_Name << std::endl;
 	std::cout << "Nickame: " << this->Nickname << std::endl;
 	std::cout << "Phone Num: " << this->Phone_Num << std::endl;
 	std::cout << "Secret: " << this->Secret << std::endl;
+
+	std::cout << "Type DONE to back to menu.\n";
+	while (!std::cin.eof())
+	{
+		std::cin >> input;
+		if (!input.compare("DONE"))
+			break;
+	}
 
 }

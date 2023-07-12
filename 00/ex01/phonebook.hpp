@@ -3,31 +3,22 @@
 
 # include <string>
 # include <iostream>
+# include <cstdlib>
+# include "Contacts.hpp"
 
 typedef std::string	str;
 
-class contact{
+class PhoneBook{
 	private:
-		str 		Frist_Name;
-		str 		Last_Name;
-		str 		Nickname;
-		str			Phone_Num;
-		str 		Secret;
-		str			Get_Info(str info);
-	
-	public:
-		void	Add_FirstName(str FirstName);
-		void	Add_LastName(str LastName);
-		void	Add_Nickname(str nickname);
-		void	Add_PhoneNum(str PhoneNum);
-		void	Add_Secret(str secret);
+		Contact	contacts[8];
+		int		index;
 		void	Print_All();
 
+	public:
+		PhoneBook();
+		~PhoneBook();
+		void SEARCH();
+		void ADD();
 };
 
-class phonebook{
-	private:
-		contact contacts[8];
-	public:
-};
-#endif 
+#endif

@@ -3,19 +3,19 @@
 int		main()
 {
 	PhoneBook	phonebook;
-	bool		exit = false;
 	str			input;
 
-
-	while (exit == false)
+	while (!std::cin.eof())
 	{
+		system("clear");
+		std::cout << "Type ADD to add a contact.\nType SEARCH to search a contact.\nType EXIT to leave.\n\n";
 		std::cin >> input;
 		if (!input.compare("ADD"))
 			phonebook.ADD();
 		if (!input.compare("SEARCH"))
 			phonebook.SEARCH();
 		if (!input.compare("EXIT"))
-			exit = true;
+			break;
 	}
-	std::cout << "EXIT SELECTED\n";
+	std::cout << "EXIT\n";
 }

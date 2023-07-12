@@ -4,12 +4,19 @@ PhoneBook::PhoneBook(){
 	this->index = 0;
 }
 
+PhoneBook::~PhoneBook(){
+}
+
 void	PhoneBook::ADD()
 {
 	str		input;
 
+	system("clear");
 	if (index > 7)
+	{
+		std::cout << "Contact limit reached old contacts will be overwritten\n";
 		index = 0;
+	}
 
 	std::cout << "Insert first name: \n";
 	std::cin >> input;
@@ -42,9 +49,9 @@ void	PhoneBook::Print_All()
 	std::cout << " ---------- ---------- ---------- ---------- " << std::endl;
 	std::cout << "|Index     |FirstName |LastName  |NickName  |" << std::endl;
 	std::cout << " ---------- ---------- ---------- ---------- " << std::endl;
-	while (contacts[++index].Full())
+	while (index < 7 && contacts[++index].Full())
 	{
-		std::cout << "|" << index + 1 << ".        |"<< contacts[index].Get_Info("First")<< "|" << contacts[index].Get_Info("Last") << "|" << contacts[index].Get_Info("Nick") << "|" << std::endl;
+		std::cout << "|        " << index + 1 << ".|"<< contacts[index].Get_Info("First")<< "|" << contacts[index].Get_Info("Last") << "|" << contacts[index].Get_Info("Nick") << "|" << std::endl;
 		std::cout << " ---------- ---------- ---------- ---------- " << std::endl;
 	}
 }
@@ -57,8 +64,11 @@ void	PhoneBook::SEARCH()
 	Print_All();
 	if (!contacts[0].Full())
 		return;
+	std::cout << "\nType a number between 1 and 8 to select a contact.\n";
 	std::cin >> input;
 	if (input - 1 >= 0 && input - 1 <= 9)
-		contacts[input - 1].Print_Contact();
-
+	{
+		if (contacts[input -1].Full())
+			contacts[input - 1].Print_Contact();
+	}
 }

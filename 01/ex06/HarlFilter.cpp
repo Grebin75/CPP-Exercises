@@ -1,4 +1,5 @@
-#include "../Harl.hpp"
+#include "HarlFilter.hpp"
+
 
 Harl::Harl(){
 	this->func[0] = &Harl::debug;
@@ -26,17 +27,39 @@ void Harl::error(){
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
 }
 
-void Harl::complain(str level)
-{
-	str levels[] = { "DEBUG", "INFO", "WARNING", "ERROR"};
-    int i = -1;
 
-    while (++i < 4)
-	{
-    	if (!levels[i].compare(level))
+unsigned int Harl::str2int(const char* str, int h)
+{
+    return !str[h] ? 5381 : (str2int(str, h+1) * 33) ^ str[h];
+}
+
+
+
+void Harl::complain(const char *level)
+{
+	//int debug = str2int("DEBUG", 0);
+
+	/* std::cout << str2int("DEBUG", 0) << std::endl;
+	std::cout << str2int("INFO", 0) << std::endl;
+	std::cout << str2int("WARNING", 0) << std::endl;
+	std::cout << str2int("ERROR", 0) << std::endl; */
+
+
+   switch (str2int(level, 0))
+   {
+		case 209478068:
+			(this->*func[0])();
+		case 2089022635:
+			(this->*func[1])();
+		case 47734607:
+			(this->*func[2])();
+		case 229190685:
 		{
-       		(this->*func[i])();
+			(this->*func[3])();
 			break;
 		}
+		default:
+			std::cout << "Type a valid level. DEBUG, INFO, WARNING, ERROR\n";
 	}
-}
+
+   }

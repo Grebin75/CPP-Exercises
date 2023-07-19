@@ -9,7 +9,7 @@ PhoneBook::~PhoneBook(){
 
 void	PhoneBook::ADD()
 {
-	str		input;
+	str		input = "";
 
 	system("clear");
 	if (index > 7)
@@ -19,26 +19,38 @@ void	PhoneBook::ADD()
 	}
 
 	std::cout << "Insert first name: \n";
-	std::cin >> input;
+	getline(std::cin, input);
 	contacts[index].Set_FirstName(input);
 
 	std::cout << "Insert last name: \n";
-	std::cin >> input;
+	getline(std::cin, input);
 	contacts[index].Set_LastName(input);
 
 	std::cout << "Insert nickame: \n";
-	std::cin >> input;
+	getline(std::cin, input);
 	contacts[index].Set_Nickname(input);
 
 	std::cout << "Insert phone number:\n";
-	std::cin >> input;
+	getline(std::cin, input);
 	contacts[index].Set_PhoneNum(input);
 
 	std::cout << "Insert secret: \n";
-	std::cin >> input;
+	getline(std::cin, input);
 	contacts[index].Set_Secret(input);
 
 	index++;
+}
+
+
+void PhoneBook::Ident(std::string str)
+{
+	if (str.length() <= 10) {
+		std::cout << std::setw(10) << str;
+		return ;
+	}
+	std::cout << std::setw(9) << str.substr(0, 9);
+	std::cout << std::setw(1) << '.';
+	return ;
 }
 
 void	PhoneBook::Print_All()
@@ -51,7 +63,16 @@ void	PhoneBook::Print_All()
 	std::cout << " ---------- ---------- ---------- ---------- " << std::endl;
 	while (index < 7 && contacts[++index].Full())
 	{
-		std::cout << "|        " << index + 1 << ".|"<< contacts[index].Get_Info("First")<< "|" << contacts[index].Get_Info("Last") << "|" << contacts[index].Get_Info("Nick") << "|" << std::endl;
+		std::cout << "|         ";
+		std::cout << index;
+		std::cout << '|';
+		Ident(contacts[index].Get_Info("First"));
+		std::cout << '|';
+		Ident(contacts[index].Get_Info("Last"));
+		std::cout << '|';
+	Ident(contacts[index].Get_Info("Nick"));
+		std::cout << '|';
+		std::cout << '\n';
 		std::cout << " ---------- ---------- ---------- ---------- " << std::endl;
 	}
 }

@@ -28,33 +28,14 @@ void  Contact::Set_Secret(str Secret)
 	this->Secret = Secret;
 }
 
-str	Contact::Ident_Info(str info)
-{
-	str	temp;
-
-	if (info.length() > 10)
-	{
-		temp = info.substr(0, 9);
-		temp.append(".");
-	}
-	else
-	{
-		temp = info;
-		while (temp.length() < 10)
-			temp.insert(0, " ");
-	}
-	return temp;
-
-}
-
 str		Contact::Get_Info(str info)
 {
 	if (!info.compare("First"))
-		return (Ident_Info(Frist_Name));
+		return (Frist_Name);
 	if (!info.compare("Last"))
-		return (Ident_Info(Last_Name));
+		return (Last_Name);
 	if (!info.compare("Nick"))
-		return (Ident_Info(Nickname));
+		return (Nickname);
 	return (NULL);
 }
 

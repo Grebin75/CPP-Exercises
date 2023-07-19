@@ -13,6 +13,7 @@ class PhoneBook{
 		Contact	contacts[8];
 		int		index;
 		void	Print_All();
+		void 	Ident(str str);
 
 	public:
 		PhoneBook();

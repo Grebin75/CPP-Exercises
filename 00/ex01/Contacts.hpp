@@ -4,6 +4,7 @@
 # include <string>
 # include <iostream>
 # include <cstdlib>
+# include <iomanip>
 
 typedef std::string	str;
 
@@ -14,7 +15,6 @@ class Contact{
 		str			Nickname;
 		str			Phone_Num;
 		str			Secret;
-		str			Ident_Info(str info);
 
 	public:
 		void		Set_FirstName(str First_Name);

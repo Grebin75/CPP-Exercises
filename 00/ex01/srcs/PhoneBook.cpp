@@ -42,7 +42,7 @@ void	PhoneBook::ADD()
 }
 
 
-void PhoneBook::Ident(std::string str)
+void PhoneBook::Ident(str str)
 {
 	if (str.length() <= 10) {
 		std::cout << std::setw(10) << str;

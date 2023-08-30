@@ -44,7 +44,7 @@ void ClapTrap::attack(const std::string& target){
 	if (Health <= 0 || Energy < 0)
 		return ;
 	Energy--;
-	std::cout << "ClapTrap " << Name << " attacks " << target << " and lost 1 Energy." << std::endl;
+	std::cout << Name << " attacks " << target << " and lost 1 Energy." << std::endl;
 };
 
 void ClapTrap::takeDamage(unsigned int amount){
@@ -57,7 +57,7 @@ void ClapTrap::takeDamage(unsigned int amount){
 		Health--;
 		amount--;
 	}
-	std::cout << Name << " took " << temp - amount << " damage" << std::endl;
+	std::cout << "ClapTrap " << Name << " took " << temp - amount << " damage" << std::endl;
 };
 
 int ClapTrap::getDamage(){

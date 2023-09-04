@@ -37,14 +37,14 @@ void ClapTrap::beRepaired(unsigned int amount){
 		amount--;
 	}
 	Energy--;
-	std::cout << Name << " heals " << temp - amount << " HP." << std::endl;
+	std::cout << "ClapTrap " << Name << " heals " << temp - amount << " HP." << std::endl;
 };
 
 void ClapTrap::attack(const std::string& target){
 	if (Health <= 0 || Energy < 0)
 		return ;
 	Energy--;
-	std::cout << Name << " attacks " << target << " and lost 1 Energy." << std::endl;
+	std::cout << "ClapTrap " << Name << " attacks " << target << " and lost 1 Energy." << std::endl;
 };
 
 void ClapTrap::takeDamage(unsigned int amount){

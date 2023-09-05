@@ -35,7 +35,7 @@ void Harl::complain(str level)
 	{
     	if (!levels[i].compare(level))
 		{
-       		(this->*func[i])();
+       		(*func[i])();
 			break;
 		}
 	}

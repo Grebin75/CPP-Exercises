@@ -27,22 +27,21 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &copy){
 }
 
 void ClapTrap::beRepaired(unsigned int amount){
-	int temp = amount;
 
-	if (Health <= 0 || Energy < 0)
-		return ;
-	while (Health < 10 && amount > 0)
-	{
-		Health++;
-		amount--;
-	}
+	if (Health <= 0 )
+		return (void)(std::cout << Name << " is dead." << std::endl);
+	if ( Energy <= 0)
+		return (void)(std::cout << Name << " is out of Energy." << std::endl);
+	Health += amount;
 	Energy--;
-	std::cout << "ClapTrap " << Name << " heals " << temp - amount << " HP." << std::endl;
+	std::cout << "ClapTrap " << Name << " heals " << amount << " HP." << std::endl;
 };
 
 void ClapTrap::attack(const std::string& target){
-	if (Health <= 0 || Energy < 0)
-		return ;
+	if (Health <= 0 )
+		return (void)(std::cout << Name << " is dead." << std::endl);
+	if ( Energy <= 0)
+		return (void)(std::cout << Name << " is out of Energy." << std::endl);
 	Energy--;
 	std::cout << "ClapTrap " << Name << " attacks " << target << " and lost 1 Energy." << std::endl;
 };
@@ -51,7 +50,7 @@ void ClapTrap::takeDamage(unsigned int amount){
 	int temp = amount;
 
 	if (Health <= 0)
-		return ;
+		return (void)(std::cout << Name << " is dead." << std::endl);
 	while (Health > 0 && amount > 0)
 	{
 		Health--;
@@ -62,4 +61,8 @@ void ClapTrap::takeDamage(unsigned int amount){
 
 int ClapTrap::getDamage(){
 	return (Damage);
-};
+}
+
+std::string ClapTrap::getName(){
+	return (Name);
+}

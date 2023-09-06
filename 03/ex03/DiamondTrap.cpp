@@ -40,5 +40,5 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap &copy){
 
 void DiamondTrap::whoAmI(){
 	std::cout << "Diamond name: " << this->Name  << std::endl;
-	std::cout << "Diamond name: " << ClapTrap::Name  << std::endl;
+	std::cout << "Diamond ClapTrap name: " << ClapTrap::Name  << std::endl;
 }

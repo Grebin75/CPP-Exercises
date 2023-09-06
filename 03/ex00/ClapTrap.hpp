@@ -8,7 +8,7 @@
 
 class ClapTrap
 {
-	protected:
+	private:
 		std::string Name;
 		int Health;
 		int Energy;
@@ -24,6 +24,7 @@ class ClapTrap
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
 		int getDamage();
+		std::string getName();
 };
 
 #endif

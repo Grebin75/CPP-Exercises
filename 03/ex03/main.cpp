@@ -2,10 +2,9 @@
 
 int main()
 {
-	DiamondTrap d ("Cabeludo Gabriel");
+	DiamondTrap d ("Gabriel");
 
 	d.attack("2");
-	d.ClapTrap::attack("3");
 	d.whoAmI();
 
 	d.highFivesGuys();

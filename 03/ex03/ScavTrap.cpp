@@ -34,8 +34,10 @@ ScavTrap& ScavTrap::operator=(const ScavTrap &copy){
 
 
 void ScavTrap::attack(const std::string& target){
-	if (Health <= 0 || Energy < 0)
-		return ;
+	if (Health <= 0 )
+		return (void)(std::cout << Name << " is dead." << std::endl);
+	if ( Energy <= 0)
+		return (void)(std::cout << Name << " is out of Energy." << std::endl);
 	Energy--;
 	std::cout << "ScavTrap " << Name << " attacks " << target << " and lost 1 Energy." << std::endl;
 }
@@ -43,4 +45,3 @@ void ScavTrap::attack(const std::string& target){
 void ScavTrap::guardGate(){
 	std::cout << "ScavTrap " << Name << " is now in Gate keeper mode." << std::endl;
 }
-

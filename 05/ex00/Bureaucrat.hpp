@@ -22,16 +22,12 @@ class Bureaucrat{
 		
 		struct GradeTooHighException : public std::exception{
 			public:
-			  const char * what () const throw () {
-      			return "Grade is too high. Max grade is 1.";
-		}
+			  const char * what () const throw ();
 		};
 
 		struct GradeTooLowException : public std::exception{
 			public:
-			  const char * what () const throw () {
-      			return "Grade is too low. Minimum grade is 150.";
-   			}
+			  const char * what () const throw ();
 		};
 
 		int getGrade() const;

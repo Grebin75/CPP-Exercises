@@ -40,6 +40,16 @@ void Bureaucrat::downGrade(int Amount){
 	std::cout << "GRADE WAS DOWNGRADED BY " << Amount << "." << std::endl;
 }
 
+const char *Bureaucrat::GradeTooHighException::what() const throw (){
+	return "Grade is too high. Max grade is 1.";
+}
+
+const char *Bureaucrat::GradeTooLowException::what() const throw (){
+	return "Grade is too low. Minimum grade is 150.";
+}
+
+
+
 Bureaucrat::~Bureaucrat(){
 }
 

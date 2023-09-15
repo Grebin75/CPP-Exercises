@@ -1,5 +1,6 @@
 SRCS = main.cpp \
 		Bureaucrat.cpp \
+		Form.cpp \
 
 FLAGS = -Werror -Wall -Wextra -std=c++98 -Wshadow -g -fsanitize=address
 CC = c++

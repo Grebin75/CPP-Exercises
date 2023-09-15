@@ -1,15 +1,19 @@
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat() : _Grade(150), _Name("Default"){
+	std::cout << "GRADE WAS SET AS " << _Grade << " AND NAME AS "  << _Name << "." << std::endl;
 }
 
 Bureaucrat::Bureaucrat(int Grade, std::string Name) : _Name(Name){
 	if (Grade > 150)
 		throw GradeTooLowException();
-	else if (Grade < 1)
+	if (Grade < 1)
 		throw GradeTooHighException();
 	_Grade = Grade;
 	std::cout << "GRADE WAS SET AS " << _Grade << " AND NAME AS "  << _Name << "." << std::endl;
+}
+
+Bureaucrat::Bureaucrat(const Bureaucrat &copy) : _Grade(copy._Grade) , _Name(copy._Name){
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& copy){
@@ -57,10 +61,3 @@ std::ostream& operator<<(std::ostream& out,  Bureaucrat const& bureaucrat){
 	out << bureaucrat.getName() << " bureaucrat grade " << bureaucrat.getGrade() << ".";
 	return out;
 }
-
-
-
-
-
-
-

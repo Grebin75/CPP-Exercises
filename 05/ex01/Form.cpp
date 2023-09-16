@@ -41,16 +41,18 @@ int Form::getExecGrade() const {
 
 
 void Form::beSigned(Bureaucrat &bc){
-	(void)bc;
+	if (bc.getGrade() > _SignGrade)
+		throw GradeTooLowException();
+	_Signed = bc.signForm(_SignGrade, _Name, _Signed);
 }
 
 
 const char *Form::GradeTooHighException::what() const throw (){
-	return "Forms Grade is too high. Max grade is 1.";
+	return "Forms Grade is too high.";
 }
 
 const char *Form::GradeTooLowException::what() const throw (){
-	return "Forms Grade is too low. Minimum grade is 150.";
+	return "Forms Grade is too low.";
 }
 
 std::ostream& operator<<(std::ostream& out, Form const& form){

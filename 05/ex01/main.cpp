@@ -25,6 +25,24 @@ void bureauCreater(int Grade, std::string Name){
 
 
 int main(){
-	Form form("Human Rights", 1, 1);
-	std::cout << form << std::endl;
+	try{
+		Form form("Human Rights", 15, 150);
+		Bureaucrat b(15, "Test");
+
+		form.beSigned(b);
+		form.beSigned(b);
+		std::cout << form << std::endl;
+	}
+	catch (Bureaucrat::GradeTooHighException &error){
+		std::cerr << error.what() << std::endl;
+	}
+	catch (Bureaucrat::GradeTooLowException &error){
+		std::cerr << error.what() << std::endl;
+	}
+	catch (Form::GradeTooHighException &error){
+		std::cerr << error.what() << std::endl;
+	}
+	catch (Form::GradeTooLowException &error){
+		std::cerr << error.what() << std::endl;
+	}
 };

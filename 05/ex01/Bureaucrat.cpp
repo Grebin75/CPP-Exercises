@@ -44,6 +44,16 @@ void Bureaucrat::downGrade(int Amount){
 	std::cout << "GRADE WAS DOWNGRADED BY " << Amount << "." << std::endl;
 }
 
+bool Bureaucrat::signForm(int signGrade, std::string formName, bool Signed){
+	if (!Signed && _Grade <= signGrade){
+		std::cout << _Name << " signed " << formName << std::endl;
+		return true;
+	}
+	std::cout << _Name << " couldn’t sign " << formName << " because is already signed" << std::endl;
+	return true;
+}
+
+
 const char *Bureaucrat::GradeTooHighException::what() const throw (){
 	return "Grade is too high. Max grade is 1.";
 }

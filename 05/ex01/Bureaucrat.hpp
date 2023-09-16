@@ -34,6 +34,8 @@ class Bureaucrat{
 		const std::string getName() const;
 		void downGrade(int Amount);
 		void upGrade(int Amount);
+
+		bool signForm(int signGrade, std::string formName, bool Signed);
 };
 
 std::ostream& operator<<(std::ostream& out,  Bureaucrat const& bureaucrat);

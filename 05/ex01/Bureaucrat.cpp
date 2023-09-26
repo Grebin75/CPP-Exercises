@@ -53,6 +53,8 @@ bool Bureaucrat::signForm(int signGrade, std::string formName, bool Signed){
 	return true;
 }
 
+Bureaucrat::~Bureaucrat(){
+}
 
 const char *Bureaucrat::GradeTooHighException::what() const throw (){
 	return "Grade is too high. Max grade is 1.";
@@ -60,11 +62,6 @@ const char *Bureaucrat::GradeTooHighException::what() const throw (){
 
 const char *Bureaucrat::GradeTooLowException::what() const throw (){
 	return "Grade is too low. Minimum grade is 150.";
-}
-
-
-
-Bureaucrat::~Bureaucrat(){
 }
 
 std::ostream& operator<<(std::ostream& out,  Bureaucrat const& bureaucrat){

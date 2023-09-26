@@ -1,7 +1,6 @@
-#include "Form.hpp"
+#include "ShrubberyCreationForm.hpp"
 
-
-void tester(int ExecGrade, int SignGrade,  std::string Name){
+/* void tester(int ExecGrade, int SignGrade,  std::string Name){
 
 		try{
 			Bureaucrat b(15, "Test");
@@ -27,10 +26,10 @@ void tester(int ExecGrade, int SignGrade,  std::string Name){
 			std::cerr << error.what() << std::endl;
 			return ;
 		}
-}
+} */
 
 
-int main(){
+/* int main(){
 	std::cout << "--------------- // TEST 1 // ---------------" << std::endl;
 	tester(60, 60 , "TEST 1");
 	std::cout << "--------------- // TEST 1 FINISHED // ---------------\n" << std::endl;
@@ -49,4 +48,23 @@ int main(){
 	tester(1, 151, "a");
 	tester(1,0, "a");
 	std::cout << "--------------- // TEST 4 FINISHED // ---------------\n" << std::endl;
-};
+}; */
+
+int main()
+{
+	try {
+		ShrubberyCreationForm a;
+	// Sign = 145 // Exec = 137
+		Bureaucrat b(-1, "Test1");
+
+		a.beSigned(b);
+	//a.beSigned(b);
+		a.execute(b);
+	}
+	catch (std::exception &error){
+		std::cerr << error.what() << std::endl;
+		return 1;
+	}
+
+
+}

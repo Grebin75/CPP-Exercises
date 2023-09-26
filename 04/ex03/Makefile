@@ -1,12 +1,10 @@
 SRCS = main.cpp \
-		Bureaucrat.cpp \
-		AForm.cpp \
-		ShrubberyCreationForm.cpp \
+		AMateria.cpp \
 
 FLAGS = -Werror -Wall -Wextra -std=c++98 -Wshadow -g -fsanitize=address
 CC = c++
 RM = rm -rf
-NAME = 28Bnot28C
+NAME = Interface
 
 all: $(NAME)
 

@@ -1,11 +1,12 @@
-#ifndef	FORM_HPP
-#define FORM_HPP
+#pragma once
 
 # include <iostream>
 # include <string>
 # include <cstdlib>
 # include <cmath>
 # include "Bureaucrat.hpp"
+
+class Bureaucrat;
 
 class Form{
 	private:
@@ -41,4 +42,3 @@ class Form{
 };
 
 std::ostream& operator<<(std::ostream& out,  Form const& form);
-#endif

@@ -1,5 +1,4 @@
-#ifndef SHRUBBERYCREATIONFORM
-#define SHRUBBERYCREATIONFORM
+#pragma once
 
 # include <iostream>
 # include <string>
@@ -20,9 +19,5 @@ class ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& copy);
 		~ShrubberyCreationForm();
 
-		void execute(Bureaucrat const & executor) const;
+		void executor() const;
 };
-
-
-
-#endif

@@ -53,6 +53,18 @@ bool Bureaucrat::signForm(int signGrade, std::string formName, bool Signed){
 	return true;
 }
 
+bool Bureaucrat::executeForm(AForm const & form) const{
+	if (form.isSigned() && _Grade <= form.getExecGrade()){
+		std::cout << _Name << " executed " << form.getName();
+		return true;
+	}
+	std::cout << _Name << " couldn’t execute " << form.getName() << 
+	(!form.isSigned() ? " because form isnt signed." : " because his grade is too low to execute") << std::endl;
+	return false;
+
+
+}
+
 
 const char *Bureaucrat::GradeTooHighException::what() const throw (){
 	return "Grade is too high. Max grade is 1.";
@@ -61,8 +73,6 @@ const char *Bureaucrat::GradeTooHighException::what() const throw (){
 const char *Bureaucrat::GradeTooLowException::what() const throw (){
 	return "Grade is too low. Minimum grade is 150.";
 }
-
-
 
 Bureaucrat::~Bureaucrat(){
 }

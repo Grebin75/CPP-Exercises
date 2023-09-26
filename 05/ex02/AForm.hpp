@@ -1,11 +1,14 @@
-#ifndef	AFORM_HPP
-#define AFORM_HPP
+#ifndef AFROM_HPP
+#define AFROM_HPP
 
-# include <iostream>
-# include <string>
-# include <cstdlib>
-# include <cmath>
-# include "Bureaucrat.hpp"
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <cmath>
+#include "Bureaucrat.hpp"
+
+
+class Bureaucrat;
 
 class AForm{
 	private:
@@ -26,8 +29,9 @@ class AForm{
 		int getExecGrade() const;
 
 		void beSigned(Bureaucrat &bc);
-		bool checkForm(Bureaucrat const & executor) const;
-		virtual void execute(Bureaucrat const & executor) const = 0;
+		void checkForm(Bureaucrat const & executor) const;
+		void execute(Bureaucrat const & executor) const;
+		virtual void executor() const = 0;
 
 
 	class GradeTooHighException : public std::exception{
@@ -39,7 +43,14 @@ class AForm{
 		public:
 			const char *what() const throw ();
 	};
-	class GradeTooLowException : public std::exception{
+
+	class FormIsntSignedException : public std::exception{
+		public:
+			const char *what() const throw ();
+
+	};
+
+	class ExecuteErrorException : public std::exception{
 		public:
 			const char *what() const throw ();
 

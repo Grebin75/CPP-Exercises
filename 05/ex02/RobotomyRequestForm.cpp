@@ -1,10 +1,10 @@
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm() : AForm("Shrubbe", 72, 45){
+RobotomyRequestForm::RobotomyRequestForm() : AForm("Robotomy", 72, 45){
 	_Target = "";
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string Target) : AForm("Shrubbe", 145, 137){
+RobotomyRequestForm::RobotomyRequestForm(std::string Target) : AForm("Robotomy", 72, 45){
 	_Target = Target;
 }
 
@@ -21,6 +21,9 @@ RobotomyRequestForm::~RobotomyRequestForm(){
 }
 
 void RobotomyRequestForm::executor() const{
-
-	//do something.
+	srand(time(NULL));
+	std::cout << "*Drilling noises*\n";
+	if (rand() % 2)
+		return ((void) (std::cout << _Target << " has been successfully robotomized." << std::endl));
+	return ((void) (std::cout << _Target << " robotization failed." << std::endl));
 }

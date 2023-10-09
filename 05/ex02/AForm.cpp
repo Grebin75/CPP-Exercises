@@ -55,8 +55,7 @@ void AForm::checkForm(const Bureaucrat& executor) const{
 
 void	AForm::execute(Bureaucrat const & executor) const
 {
-	if (!executor.executeForm(*this))
-		throw ExecuteErrorException();
+	executor.executeForm(*this);
 	this->executor();
 }
 
@@ -72,9 +71,9 @@ const char *AForm::FormIsntSignedException::what() const throw (){
 	return "Form isnt signed.";
 }
 
-const char *AForm::ExecuteErrorException::what() const throw (){
+/* const char *AForm::ExecuteErrorException::what() const throw (){
 	return "Error while executing form.";
-}
+} */
 
 std::ostream& operator<<(std::ostream& out, AForm const& AForm){
 	out << "Form Info:\n  Name: " << AForm.getName() << "\n  SignGrade: "

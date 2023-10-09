@@ -1,4 +1,6 @@
 #include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 /* void tester(int ExecGrade, int SignGrade,  std::string Name){
 
@@ -52,18 +54,49 @@
 
 int main()
 {
-	try {
-		ShrubberyCreationForm a;
-	// Sign = 145 // Exec = 137
-		Bureaucrat b(-1, "Test1");
+	{
+		try {
+		ShrubberyCreationForm a("tree");
+		// Sign = 145 // Exec = 137
+		Bureaucrat b(1, "Test1");
 
 		a.beSigned(b);
-	//a.beSigned(b);
+		//a.beSigned(b);
 		a.execute(b);
-	}
-	catch (std::exception &error){
+		}
+		catch (std::exception &error){
 		std::cerr << error.what() << std::endl;
-		return 1;
+		}
+	}
+	{
+		try {
+			PresidentialPardonForm a("Gabriel");
+			// Sign = 25 // Exec = 5
+			Bureaucrat b(5, "Miguel");
+
+			a.beSigned(b);
+			//a.beSigned(b);
+			a.execute(b);
+
+		}
+		catch (std::exception &error){
+		std::cerr << error.what() << std::endl;
+		}
+	}
+	{
+		try {
+			RobotomyRequestForm a("Gabriel");
+			// Sign = 72 // Exec = 45
+			Bureaucrat b(1, "Test1");
+
+			a.beSigned(b);
+			//a.beSigned(b);
+			a.execute(b);
+		}
+		catch (std::exception &error){
+		std::cerr << error.what() << std::endl;
+		}
+
 	}
 
 

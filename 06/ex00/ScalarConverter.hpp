@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <cmath>
 #include <cctype>
+#include <float.h>
+#include <limits>
 
 class ScalarConverter{
 	private:
@@ -15,10 +17,22 @@ class ScalarConverter{
 		static int intCheck(std::string av);
 		static int floatCheck(std::string av);
 		static int doubleCheck(std::string av);
+		static int pseudoCheck(std::string av);
+		static void printChar(std::string av);
+		static void printInt(std::string av);
+		static void printFloat(std::string av);
+		static void printDouble(std::string av);
+		static void printPFloat(std::string av);
+		static void printPDouble(std::string av);
 	
 	public:
 		ScalarConverter& operator=(const ScalarConverter& copy);
 		~ScalarConverter();
 		static void convert(std::string av);
+
+		class InvalidArg : public std::exception{
+		public:
+			const char *what() const throw ();
+	};
 };
 #endif

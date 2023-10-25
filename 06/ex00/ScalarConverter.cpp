@@ -13,10 +13,119 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& copy){
 }
 
 void ScalarConverter::convert(std::string av){
-	std::cout << "Type: " << setType(av) << std::endl;
-	//setType(av);
+	int type = setType(av);
+	try{
+		switch (type){
+			case 1:
+				return printChar(av);
+			case 2:
+				return printInt(av);
+			case 3:
+				return printFloat(av);
+			case 4:
+				return printDouble(av);
+			case 5:
+				return printPDouble(av);
+			case 6:
+				return printPFloat(av);
+			default:
+				throw ScalarConverter::InvalidArg();
+		}
+	}
+	catch (std::exception &e){
+		std::cerr << e.what() << std::endl;
+	}
 }
 
+void ScalarConverter::printChar(std::string av){
+	std::cout << "Char: '" << av[0] << "'" << std::endl;
+	std::cout << "Int: " << static_cast<int>(av[0]) << std::endl;
+	std::cout << "Float: " << static_cast<float>(av[0]) << ".0f" << std::endl;
+	std::cout << "Double: "<< static_cast<double>(av[0]) << ".0" << std::endl;
+}
+
+void ScalarConverter::printInt(std::string av){
+	if (av.length() > 11)
+		throw ScalarConverter::InvalidArg();
+	long test = std::stol(av);
+	if (test > std::numeric_limits<int>::max() || test < std::numeric_limits<int>::min())
+		throw ScalarConverter::InvalidArg();
+	int num = atoi(av.c_str());
+	char c = static_cast<char>(num);
+	if (num >= 32 && num <= 126)
+		std::cout << "Char: '" << c << "'" << std::endl;
+	else
+		std::cout << "Char: " << ((num < 0 || num > 127) ? "Impossible" : "Non displayable") << std::endl;
+	std::cout << "Int: " << num << std::endl;
+	std::cout << "Float: " << static_cast<float>(num) << ".0f" << std::endl;
+	std::cout << "Double: " << static_cast<double>(num) << ".0" << std::endl;
+}
+
+void ScalarConverter::printFloat(std::string av){
+	float num = strtof(av.c_str(), NULL);
+	if (num == HUGE_VALF || num == -HUGE_VALF)
+		throw ScalarConverter::InvalidArg();
+	char	c = static_cast<char>(num);
+	int 	i = static_cast<int>(num);
+
+	if (num >= 32 && num <= 126)
+		std::cout << "Char: '" << c << "'" << std::endl;
+	else
+		std::cout << "Char: " << ((num < 0 || num > 127) ? "Impossible" : "Non displayable") << std::endl;
+	if (num >= INT_MAX || num <= INT_MIN)
+		std::cout << "Int: " << "Impossible" << std::endl;
+	else
+		std::cout << "Int: " << i << std::endl;
+	std::cout << "Float: " << num << ((num == i) ? ".0f" : "f") << std::endl;
+	std::cout << "Double: " << static_cast<double>(num) << ((num == i) ? ".0" : "") << std::endl;
+}
+
+void ScalarConverter::printDouble(std::string av){
+	double	num = strtod(av.c_str(), NULL);
+
+	if (num == HUGE_VAL || num == -HUGE_VAL)
+		throw ScalarConverter::InvalidArg();
+
+	char	c = static_cast<char>(num);
+	int 	i = static_cast<int>(num);
+
+	if (num >= 32 && num <= 126)
+		std::cout << "Char: '" << c << "'" << std::endl;
+	else
+		std::cout << "Char: " << ((num < 0 || num > 127) ? "Impossible" : "Non displayable") << std::endl;
+	if (num >= INT_MAX || num <= INT_MIN)
+		std::cout << "Int: " << "Impossible" << std::endl;
+	else
+		std::cout << "Int: " << i << std::endl;
+	if (num > std::numeric_limits<float>::max() || num < std::numeric_limits<float>::min())
+		std::cout << "Float: " << "Impossible" << std::endl;
+	else
+		std::cout << "Float: " << static_cast<float>(num) << ((num == i) ? ".0f" : "f") << std::endl;
+	std::cout << "Double: " << num << ((num == i) ? ".0" : "") << std::endl;
+	
+
+}
+void ScalarConverter::printPDouble(std::string av){
+	std::cout << "Char: " << "Impossible\n";
+	std::cout << "Int: " << "Impossible\n";
+	if (av == "inf")
+		return (void)(std::cout << "Float: " << static_cast<float>(strtod(av.c_str(), NULL)) << "f\nDouble: inf" << std::endl);
+	if (av == "-inf")
+		return (void)(std::cout << "Float: " << static_cast<float>(strtod(av.c_str(), NULL)) << "f\nDouble: -inf" << std::endl);
+	if (av == "nan")
+		return (void)(std::cout << "Float: " << static_cast<float>(strtod(av.c_str(), NULL)) << "f\nDouble: nan" << std::endl);
+}
+
+void ScalarConverter::printPFloat(std::string av){
+	std::cout << "Char: " << "Impossible\n";
+	std::cout << "Int: " << "Impossible\n";
+	if (av == "inff")
+		return (void)(std::cout << "Float: inff\n" << "Double: " << static_cast<double>(strtof(av.c_str(), NULL))<< std::endl);
+	if (av == "-inff")
+		return (void)(std::cout << "Float: -inff\n" << "Double: " << static_cast<double>(strtof(av.c_str(), NULL))<< std::endl);
+	if (av == "nanf")
+		return (void)(std::cout << "Float: nanf\n" << "Double: " <<  static_cast<double>(strtof(av.c_str(), NULL))<< std::endl);
+}
 
 int ScalarConverter::intCheck(std::string av){
 	int i = (av[0] == '-' || av[0] == '+');
@@ -65,6 +174,18 @@ int ScalarConverter::floatCheck(std::string av){
 	return ((av[i] == 'f' && dot) ? 1 : 0);
 }
 
+int ScalarConverter::pseudoCheck(std::string av){
+{
+	std::string	pseudo[6] = {"inf", "-inf", "nan", "inff", "-inff", "nanf"};
+
+	for (int i = 0; i < 6; i++)
+		if (pseudo[i] == av)
+			return ((i > 2) + 5);
+	return 0;
+}
+}
+
+
 int ScalarConverter::setType(std::string av){
 	if (av.length() == 1 && (av[0] < '0' || av[0] > '9'))
 		return 1;
@@ -74,7 +195,11 @@ int ScalarConverter::setType(std::string av){
 		return 3;
 	if (doubleCheck(av))
 		return 4;
-	return 0;
+	return (pseudoCheck(av));
+}
+
+const char *ScalarConverter::InvalidArg::what() const throw (){
+	return "Invalid/Overflow argument.\nTry with a char/int/float/double.";
 }
 
 ScalarConverter::~ScalarConverter(){}

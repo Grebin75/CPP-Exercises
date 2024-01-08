@@ -7,6 +7,7 @@
 #include <cmath>
 #include <cctype>
 #include <float.h>
+#include <climits>
 #include <limits>
 
 class ScalarConverter{
@@ -35,4 +36,10 @@ class ScalarConverter{
 			const char *what() const throw ();
 	};
 };
+
+int typeSelecter(std::string av);
+bool intCheck(std::string av);
+bool floatCheck(std::string av);
+bool doubleCheck(std::string av);
+int pseudoCheck(std::string av);
 #endif

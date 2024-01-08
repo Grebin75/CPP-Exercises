@@ -47,7 +47,7 @@ void ScalarConverter::printChar(std::string av){
 void ScalarConverter::printInt(std::string av){
 	if (av.length() > 11)
 		throw ScalarConverter::InvalidArg();
-	long test = std::stol(av);
+	long test = std::strtol(av.c_str(), NULL, 10);
 	if (test > std::numeric_limits<int>::max() || test < std::numeric_limits<int>::min())
 		throw ScalarConverter::InvalidArg();
 	int num = atoi(av.c_str());
@@ -175,14 +175,13 @@ int ScalarConverter::floatCheck(std::string av){
 }
 
 int ScalarConverter::pseudoCheck(std::string av){
-{
+
 	std::string	pseudo[6] = {"inf", "-inf", "nan", "inff", "-inff", "nanf"};
 
 	for (int i = 0; i < 6; i++)
 		if (pseudo[i] == av)
 			return ((i > 2) + 5);
 	return 0;
-}
 }
 
 
@@ -203,3 +202,91 @@ const char *ScalarConverter::InvalidArg::what() const throw (){
 }
 
 ScalarConverter::~ScalarConverter(){}
+
+
+void ex(std::string av){
+	int type = typeSelecter(av);
+	(void)type;
+	/* switch (type){
+		case 0:
+			write char
+		case 1:
+			write int
+		case 2:
+			write float
+		case 3:
+			write double
+		case ...
+	} */
+}
+
+int typeSelecter(std::string av){
+	if (av.length() == 1 && (av[0] < '0' || av[0] > '9')) 
+		return 1;
+	if (intCheck(av)) 
+		return 2;
+	if (floatCheck(av)) 
+		return 3;
+	if (doubleCheck(av))
+		return 4;
+	return pseudoCheck(av);
+	
+	
+}
+
+bool intCheck(std::string av){
+	int i = (av[0] == '-' || av[0] == '+');
+	for (; av[i]; i++){
+		if(!isdigit(av[i]))
+			return false;
+	}
+	return true;
+}
+
+bool doubleCheck(std::string av){
+	int i = (av[0] == '-' || av[0] == '+');
+	bool dot = false;
+
+	for (; av[i]; i++){
+		if(!isdigit(av[i])){
+			if (av[i] == '.'){
+				if (dot)
+					return 0;
+				dot = true;
+				continue;
+			}
+			return 0;
+		}
+	}
+	return ((dot) ? true : false);
+}
+
+bool floatCheck(std::string av){
+	int i = (av[0] == '-' || av[0] == '+');
+	bool dot = false;
+
+	for (; av[i]; i++){
+		if(!isdigit(av[i])){
+			if (av[i] == '.'){
+				if (dot)
+					return 0;
+				dot = true;
+				continue;
+			}
+			else if (av[i] == 'f' && (int)av.length() - 1 == i && isdigit(av[i - 1]))
+				break ;
+			return false;
+		}
+	}
+	return ((av[i] == 'f' && dot) ? true : false);
+}
+
+int pseudoCheck(std::string av){
+
+	std::string	pseudo[6] = {"inf", "-inf", "nan", "inff", "-inff", "nanf"};
+
+	for (int i = 0; i < 6; i++)
+		if (pseudo[i] == av)
+			return ((i > 2) + 5);
+	return 0;
+}

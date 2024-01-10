@@ -1,15 +1,11 @@
 SRCS = main.cpp \
-		Bureaucrat.cpp \
-		AForm.cpp \
-		ShrubberyCreationForm.cpp \
-		RobotomyRequestForm.cpp \
-		PresidentialPardonForm.cpp \
-		Intern.cpp \
+		Base.cpp \
+		
 
 FLAGS = -Werror -Wall -Wextra -std=c++98 -Wshadow -g -fsanitize=address
 CC = c++
 RM = rm -rf
-NAME = Intern
+NAME = RealType
 
 all: $(NAME)
 

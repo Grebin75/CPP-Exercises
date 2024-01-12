@@ -9,6 +9,7 @@
 #include <float.h>
 #include <climits>
 #include <limits>
+#include <iomanip>
 
 class ScalarConverter{
 	private:

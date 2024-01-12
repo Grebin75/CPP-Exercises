@@ -70,7 +70,7 @@ void printFloat(std::string av){
 		std::cout << "Char: '" << c << "'" << std::endl;
 	else
 		std::cout << "Char: " << ((num < 0 || num > 127) ? "Impossible" : "Non displayable") << std::endl;
-	if (num >= INT_MAX || num <= INT_MIN)
+	if (num > INT_MAX || num < INT_MIN)
 		std::cout << "Int: " << "Impossible" << std::endl;
 	else
 		std::cout << "Int: " << i << std::endl;
@@ -106,7 +106,7 @@ void printDouble(std::string av){
 void printPDouble(std::string av){
 	std::cout << "Char: " << "Impossible\n";
 	std::cout << "Int: " << "Impossible\n";
-	if (av == "inf")
+	if (av == "+inf")
 		return (void)(std::cout << "Float: " << static_cast<float>(strtod(av.c_str(), NULL)) << "f\nDouble: inf" << std::endl);
 	if (av == "-inf")
 		return (void)(std::cout << "Float: " << static_cast<float>(strtod(av.c_str(), NULL)) << "f\nDouble: -inf" << std::endl);
@@ -132,23 +132,6 @@ const char *ScalarConverter::InvalidArg::what() const throw (){
 }
 
 ScalarConverter::~ScalarConverter(){}
-
-
-void ex(std::string av){
-	int type = typeSelecter(av);
-	(void)type;
-	/* switch (type){
-		case 0:
-			write char
-		case 1:
-			write int
-		case 2:
-			write float
-		case 3:
-			write double
-		case ...
-	} */
-}
 
 int typeSelecter(std::string av){
 	if (av.length() == 1 && (av[0] < '0' || av[0] > '9')) 
@@ -203,7 +186,7 @@ bool floatCheck(std::string av){
 				dot = true;
 				continue;
 			}
-			else if (av[i] == 'f' && (int)av.length() - 1 == i && isdigit(av[i - 1]))
+			else if (av[i] == 'f' && (int)av.length() - 1 == i && (isdigit(av[i - 1]) || (av[i - 1] == '.' && isdigit(av[0]))))
 				break ;
 			return false;
 		}
@@ -213,7 +196,7 @@ bool floatCheck(std::string av){
 
 int pseudoCheck(std::string av){
 
-	std::string	pseudo[6] = {"inf", "-inf", "nan", "inff", "-inff", "nanf"};
+	std::string	pseudo[6] = {"+inf", "-inf", "nan", "inff", "-inff", "nanf"};
 
 	for (int i = 0; i < 6; i++)
 		if (pseudo[i] == av)

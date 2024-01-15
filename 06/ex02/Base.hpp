@@ -1,5 +1,8 @@
-#ifndef Base_HPP
-#define Base_HPP
+#ifndef BASE_HPP
+#define BASE_HPP
+
+#include <cstdlib>
+#include <iostream>
 
 class Base {
 	public:

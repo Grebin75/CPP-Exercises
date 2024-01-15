@@ -27,9 +27,6 @@ Base *generate(void)
 	}
 }
 
-void identify(Base &p){
-	(void)p;
-}
 
 void identify(Base *p){
 	A	*a = dynamic_cast<A*>(p);
@@ -44,16 +41,38 @@ void identify(Base *p){
 		return (void)(std::cout << "Pointer p is of type C\n");
 	(std::cout << "Pointer p is not of type A, B or C\n");
 }
+void identify(Base &p){
+	try{
+		(void) dynamic_cast<A&>(p);
+		std::cout << "Reference p is type A\n";
+	}
+	catch (const std::bad_cast &err){
+		try{
+			(void) dynamic_cast<B&>(p);
+			std::cout << "Reference p is type B\n";
+		}
+		catch (const std::bad_cast &err){
+			try{
+				(void) dynamic_cast<C&>(p);
+				std::cout << "Reference p is type C\n";
+			}
+			catch (const std::bad_cast &err){
+				std::cout << "Reference p is not type A, B or C\n";
+			}
+		}
+
+	}
+}
 
 int	main(void)
 {
 	Base	*p;
 	srand(time(NULL));
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		p = generate();
 
-		//identify(p);
+		identify(p);
 		identify(*p);
 		if (p)
 			delete p;

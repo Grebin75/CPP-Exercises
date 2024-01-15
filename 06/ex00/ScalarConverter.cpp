@@ -40,29 +40,32 @@ void ScalarConverter::convert(std::string av){
 void printChar(std::string av){
 	std::cout << "Char: '" << av[0] << "'" << std::endl;
 	std::cout << "Int: " << static_cast<int>(av[0]) << std::endl;
-	std::cout << "Float: " << static_cast<float>(av[0]) << ".0f" << std::endl;
-	std::cout << "Double: "<< static_cast<double>(av[0]) << ".0" << std::endl;
+	std::cout << "Float: " << static_cast<float>(av[0]) << "f" << std::endl;
+	std::cout << "Double: "<< static_cast<double>(av[0])  << std::endl;
 }
 
 void printInt(std::string av){
-	long test = std::strtol(av.c_str(), NULL, 10);
-	if (test > std::numeric_limits<int>::max() || test < std::numeric_limits<int>::min())
+	long test = std::atol(av.c_str());
+	if (test > INT_MAX || test < INT_MIN)
 		throw ScalarConverter::InvalidArg();
+
 	int num = atoi(av.c_str());
 	char c = static_cast<char>(num);
+
 	if (num >= 32 && num <= 126)
 		std::cout << "Char: '" << c << "'" << std::endl;
 	else
 		std::cout << "Char: " << ((num < 0 || num > 127) ? "Impossible" : "Non displayable") << std::endl;
 	std::cout << "Int: " << num << std::endl;
-	std::cout << "Float: " << static_cast<float>(num) << ".0f" << std::endl;
-	std::cout << "Double: " << static_cast<double>(num) << ".0" << std::endl;
+	std::cout << "Float: " << static_cast<float>(num) << "f" << std::endl;
+	std::cout << "Double: " << static_cast<double>(num) << std::endl;
 }
 
 void printFloat(std::string av){
-	float num = strtof(av.c_str(), NULL);
+	float num = atof(av.c_str());
 	if (num == HUGE_VALF || num == -HUGE_VALF)
 		throw ScalarConverter::InvalidArg();
+
 	char	c = static_cast<char>(num);
 	int 	i = static_cast<int>(num);
 
@@ -70,12 +73,12 @@ void printFloat(std::string av){
 		std::cout << "Char: '" << c << "'" << std::endl;
 	else
 		std::cout << "Char: " << ((num < 0 || num > 127) ? "Impossible" : "Non displayable") << std::endl;
-	if (num > INT_MAX || num < INT_MIN)
+	if (i >= INT_MAX || i <= INT_MIN)
 		std::cout << "Int: " << "Impossible" << std::endl;
 	else
 		std::cout << "Int: " << i << std::endl;
-	std::cout << "Float: " << num << ((num == i) ? ".0f" : "f") << std::endl;
-	std::cout << "Double: " << static_cast<double>(num) << ((num == i) ? ".0" : "") << std::endl;
+	std::cout << "Float: " << num << "f" << std::endl;
+	std::cout << "Double: " << static_cast<double>(num)  << std::endl;
 }
 
 void printDouble(std::string av){
@@ -91,15 +94,15 @@ void printDouble(std::string av){
 		std::cout << "Char: '" << c << "'" << std::endl;
 	else
 		std::cout << "Char: " << ((num < 0 || num > 127) ? "Impossible" : "Non displayable") << std::endl;
-	if (num >= INT_MAX || num <= INT_MIN)
+	if (num > INT_MAX || num < INT_MIN)
 		std::cout << "Int: " << "Impossible" << std::endl;
 	else
 		std::cout << "Int: " << i << std::endl;
 	if (num > std::numeric_limits<float>::max() || num < std::numeric_limits<float>::min())
 		std::cout << "Float: " << "Impossible" << std::endl;
 	else
-		std::cout << "Float: " << static_cast<float>(num) << ((num == i) ? ".0f" : "f") << std::endl;
-	std::cout << "Double: " << num << ((num == i) ? ".0" : "") << std::endl;
+		std::cout << "Float: " << static_cast<float>(num) << "f" << std::endl;
+	std::cout << "Double: " << num << std::endl;
 	
 
 }
@@ -117,8 +120,8 @@ void printPDouble(std::string av){
 void printPFloat(std::string av){
 	std::cout << "Char: " << "Impossible\n";
 	std::cout << "Int: " << "Impossible\n";
-	if (av == "inff")
-		return (void)(std::cout << "Float: inff\n" << "Double: " << static_cast<double>(strtof(av.c_str(), NULL))<< std::endl);
+	if (av == "+inff")
+		return (void)(std::cout << "Float: +inff\n" << "Double: " << static_cast<double>(strtof(av.c_str(), NULL))<< std::endl);
 	if (av == "-inff")
 		return (void)(std::cout << "Float: -inff\n" << "Double: " << static_cast<double>(strtof(av.c_str(), NULL))<< std::endl);
 	if (av == "nanf")
@@ -196,7 +199,7 @@ bool floatCheck(std::string av){
 
 int pseudoCheck(std::string av){
 
-	std::string	pseudo[6] = {"+inf", "-inf", "nan", "inff", "-inff", "nanf"};
+	std::string	pseudo[6] = {"+inf", "-inf", "nan", "+inff", "-inff", "nanf"};
 
 	for (int i = 0; i < 6; i++)
 		if (pseudo[i] == av)

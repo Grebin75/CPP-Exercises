@@ -7,7 +7,7 @@ int main(){
 		//char *array = NULL;
 
 		::inter(array1, 6, showValue);
-			std::cout << " ---------- // ----------\n";
+		std::cout << " ---------- // ----------\n";
 		::inter(array2, 4, showValue);
 
 	}

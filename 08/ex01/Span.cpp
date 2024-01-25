@@ -24,6 +24,12 @@ void Span::addNum(int i){
 	iV.push_back(i);
 }
 
+void Span::addRange(std::vector<int>::iterator begin, std::vector<int>::iterator end){
+	if (iV.size() >= _N || (std::distance(begin, end) + iV.size()) > _N)
+		throw MaxRange();
+	iV.insert(iV.end(), begin, end);
+}
+
 long Span::longestSpan(){
 	if(_N <= 1)
 		throw NoSpan();
@@ -42,6 +48,14 @@ long Span::shortestSpan(){
 
 	std::sort(temp.iV.begin(), temp.iV.end());
 	return (long)temp.iV.at(1) - (long)temp.iV.at(0);
+}
+
+void Span::printVector(){
+
+	for(unsigned int i = 0; i < iV.size() - 1; i++){
+			std::cout << iV.at(i) << " ";
+		};
+	std::cout << std::endl;
 }
 
 Span::~Span(){}

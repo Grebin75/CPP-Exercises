@@ -7,15 +7,6 @@ int main(int ac, char **av){
 		std::cout << "Try ./btc 'intput_file'." << std::endl;
 		return 1; 
 	}
-
-	std::map<std::string, float> BTCbase;
+	std::cout << std::fixed << std::setprecision(2);
 	calcBTC(av[1]);
-	/* readBase(BTCbase);
-	std::map<std::string, float>::iterator it = BTCbase.begin();
- 
-    while (it != BTCbase.end()) {
-        std::cout << "Date: " << it->first
-             << " Value: " << it->second << std::endl;
-        ++it;
-    } */
 }

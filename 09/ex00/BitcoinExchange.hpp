@@ -10,7 +10,7 @@
 
 void calcBTC(char *file);
 void checkLine(std::string line);
-std::map<std::string, float>& readBase(std::map<std::string, float>& BTC);
+std::map<std::string, float> readBase(std::map<std::string, float>& BTC);
 void checkDate(int Y, int M, int D, std::string line);
 bool isLeap(int Year);
 void calc(std::string date, double Value);

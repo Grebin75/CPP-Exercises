@@ -1,7 +1,7 @@
 #include "BitcoinExchange.hpp"
 
 
-std::map<std::string, float>& readBase(std::map<std::string, float>& BTC){
+std::map<std::string, float> readBase(std::map<std::string, float>& BTC){
 
 	std::ifstream   BTCbase("data.csv");
 	std::string 	date;
@@ -88,7 +88,7 @@ void checkLine(std::string line){
 	i = line.find(' ', i) + 3;
 	double Value = atof(line.substr(i).c_str());
 	
-	if (Value > 1000){
+	if (Value > 1000 || Value < 0){
 		error = "Error: A valid value must be between 0 and 1000 => " + line;
 		throw std::runtime_error(error.c_str());
 	}
@@ -96,13 +96,19 @@ void checkLine(std::string line){
 	calc(date, Value);
 }
 
-/* void calc(std::string date, double Value){
+void calc(std::string date, double Value){
 	std::map<std::string, float> BTCbase;
-	readBase(BTCbase);
+	BTCbase = readBase(BTCbase);
 
-} */
+	std::map<std::string, float>::iterator it = BTCbase.begin();
+	std::map<std::string, float>::iterator last = BTCbase.end()--;
 
-
-
-
-
+	for (;it != BTCbase.end(); it++){
+		if (it->first == date)
+			return (void)(std::cout << date << " => " << Value << " = " << it->second * Value << std::endl);
+		if (it->first > date)
+			return (void)(std::cout << date << " => " << Value << " = " << last->second * Value << std::endl);
+		last = it;
+	};
+	return (void)(std::cout << date << " => " << Value << " = "  << last->second * Value << std::endl);
+}

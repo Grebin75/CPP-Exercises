@@ -43,10 +43,11 @@ void calcBTC(char *file){
 }
 
 bool isLeap(int Year){
-	if (Year % 4 == 0)
+	/* if (Year % 4 == 0)
 		if ((Year % 100 == 0 && Year % 400 == 0) || Year % 100 != 0)
 				return true;
-	return false;
+	return false; */
+	return ((Year % 4 == 0 && ((Year % 100 == 0 && Year % 400 == 0) || Year % 100 != 0)) ? true : false);
 }
 
 void checkDate(int Y, int M, int D, std::string line){
@@ -73,7 +74,8 @@ void checkDate(int Y, int M, int D, std::string line){
 void checkLine(std::string line){
 	std::string error;
 
-	if (line.empty() || line.length() < 14 || line[10] != ' ' || line[11] != '|' || line[12] != ' ' || line[13] == ' '){
+	if (line.empty() || line.length() < 14 || line[10] != ' ' || line[11] != '|' ||
+	line[12] != ' ' || !(line[13] >= '0' && line[13] <= '9')){
 		error = "Error: bad input => " + line;
 		throw std::runtime_error(error.c_str());
 	}
@@ -86,7 +88,7 @@ void checkLine(std::string line){
 	i = line.find('-', i) + 1;
 	int Day = atoi(line.substr(i, line.find(' ')).c_str());
 	i = line.find(' ', i) + 3;
-	double Value = atof(line.substr(i).c_str());
+	double Value = atol(line.substr(i).c_str());
 	
 	if (Value > 1000 || Value < 0){
 		error = "Error: A valid value must be between 0 and 1000 => " + line;
@@ -101,7 +103,7 @@ void calc(std::string date, double Value){
 	BTCbase = readBase(BTCbase);
 
 	std::map<std::string, float>::iterator it = BTCbase.begin();
-	std::map<std::string, float>::iterator last = BTCbase.end()--;
+	std::map<std::string, float>::iterator last;
 
 	for (;it != BTCbase.end(); it++){
 		if (it->first == date)

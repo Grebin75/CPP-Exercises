@@ -10,27 +10,19 @@ void calc(std::stack<int> &stack, char input){
     int num1 = stack.top();
     stack.pop();
 
-    char operation[] = { '+', '-', '/', '*'};
-    int i;
-
-    for (i = 0; i < 4; i++){
-    if (input == operation[i])
-        break;
-    }
-
-    switch (i){
-    case 0:
+    switch (input){
+    case '+':
         stack.push(num1 + num2);
         break;
-    case 1:
+    case '-':
         stack.push(num1 - num2);
         break;
-    case 2:
+    case '/':
         if ((num1 == 0) || (num2 ==0))
             throw std::runtime_error("You cant divide by 0");
         stack.push(num1 / num2);
         break;
-    case 3:
+    case '*':
         stack.push(num1 * num2);
         break;
   }

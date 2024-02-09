@@ -7,9 +7,14 @@ int main(int ac, char **av){
         return 1;
     }
     try{
-        Merge merge(av);
-
-
+        std::vector<int> vec;
+        std::list<int> list;
+        fillArgs(av, vec, list);
+        std::cout << "Before: ";
+        print(vec);
+        sortVec(vec);
+        std::cout << "After: ";
+        print(vec);
     }
     catch (std::exception &err){
         std::cerr << err.what() << std::endl;

@@ -28,15 +28,51 @@ void print(std::vector<int> &vec){
     std::cout << std::endl;
 }
 
+void recSort(std::vector<std::pair<int, int> > &pairs, size_t j){
+    if (j == pairs.size()) return;
+
+    for (size_t i = 0; i < pairs.size() - 1; i++){
+        if (pairs[i].first > pairs[j].first)
+            std::swap(pairs[i], pairs[j]);
+    }
+    
+    recSort(pairs, ++j);
+}
+
+void bigChain(std::vector<std::pair<int, int> > &pairs, bool odd, int i){
+    std::vector<int> MainChain;
+   (void)odd;
+    MainChain.push_back(pairs[0].second);
+    for (std::vector<std::pair<int, int> >::iterator ip = pairs.begin(); ip != pairs.end(); ip++){
+         MainChain.push_back(ip->first);
+    }
+    print(MainChain);
+}
+
 void sortVec(std::vector<int> &vec){
-    if (vec.size() <= 1) 
-        return;
+    bool odd = (vec.size() % 2);
+    int pair = vec.size() / 2;
+    int tmp = 0;
 
-    int mid = vec.size() / 2;
-    std::vector<int> left(vec.begin(), vec.begin() + mid);
-    std::vector<int> right(vec.begin() + mid, vec.end());
+    std::vector<std::pair<int, int> > pairs;
+   // print(vec);
+    std::vector<int>::iterator it = vec.begin();
 
-    sortVec(left);
-    sortVec(right);
-    merge(left.begin(), left.end(), right.begin(), right.begin(), vec.begin());
+    for(int i = 0; it != vec.end() && !(odd && (i == pair)); it+= 2, i++){
+        pairs.push_back(std::pair<int, int>(*it, *(it + 1)));
+    }
+    if (odd)
+        tmp = *it;
+
+    std::vector<std::pair<int, int> >::iterator ip = pairs.begin();
+    for (int i = 0; ip != pairs.end(); ip++, i++){
+        if (ip->first < ip->second)
+            std::swap(ip->first, ip->second);
+    }
+    recSort(pairs, 0);
+    bigChain(pairs, odd, tmp);
+    for (std::vector<std::pair<int, int> >::iterator ip = pairs.begin(); ip != pairs.end(); ip++){
+        std::cout << "A: " << ip->first << " B: " << ip->second << std::endl;
+    }
+    //merge(left.begin(), left.end(), right.begin(), right.begin(), vec.begin());
 }

@@ -1,15 +1,13 @@
 #include "RPN.hpp"
 
-void calc(std::stack<int> &stack, char input){
+void calc(std::stack<long> &stack, char input){
    
-    if (stack.size() != 2 && stack.size() != 3)
+    if (stack.size() < 2 )
         throw std::runtime_error("Missing numbers.");
-
-    int num2 = stack.top();
+    long num2 = stack.top();
     stack.pop();
-    int num1 = stack.top();
+    long num1 = stack.top();
     stack.pop();
-
     switch (input){
     case '+':
         stack.push(num1 + num2);
@@ -30,12 +28,14 @@ void calc(std::stack<int> &stack, char input){
 }
 
 void RPN(char *input){
-    std::stack<int> stack;
+    std::stack<long> stack;
 
     for (int i = 0; input[i]; i++){
-        if(isspace(input[i]))
+        if(input[i] == ' ')
             continue;
-        if (isdigit(input[i]) && stack.size() < 4){
+        if(input[i + 1] && input[i + 1] != ' ')
+           throw std::runtime_error("Missing spaces."); 
+        if (isdigit(input[i])){
             stack.push(atoi(&input[i]));
             continue;
         }
@@ -44,6 +44,7 @@ void RPN(char *input){
             calc(stack, input[i]);
             continue;
         }
+        std::cout << input[i] << std::endl;
         throw std::runtime_error("Invalid Chars.");
     }
     if (stack.size() != 1)

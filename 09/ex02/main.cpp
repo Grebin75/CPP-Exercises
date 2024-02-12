@@ -10,11 +10,10 @@ int main(int ac, char **av){
         std::vector<int> vec;
         std::list<int> list;
         fillArgs(av, vec, list);
-        std::cout << "Before: ";
-        print(vec);
+       // std::cout << "Before: ";
         sortVec(vec);
-        std::cout << "After: ";
-        print(vec);
+        //std::cout << "After: ";
+        //print(vec);
     }
     catch (std::exception &err){
         std::cerr << err.what() << std::endl;

@@ -16,7 +16,7 @@ void calc(std::stack<long> &stack, char input){
         stack.push(num1 - num2);
         break;
     case '/':
-        if ((num1 == 0) || (num2 ==0))
+        if (num2 == 0)
             throw std::runtime_error("You cant divide by 0");
         stack.push(num1 / num2);
         break;

@@ -116,7 +116,8 @@ void sortVec(std::vector<int> &vec){
 	}
 
     if (odd){
-        for (b_it = vec.begin(); b_it != vec.end() && *b_it < tmp; b_it++);
+        for (b_it = vec.begin(); b_it != vec.end() && *b_it < tmp; b_it++)
+            ;
 		vec.insert(b_it, tmp);
     }
     
@@ -218,7 +219,8 @@ void sortDeque(std::deque<int> &deque){
 	}
 
     if (odd){
-        for (b_it = deque.begin(); b_it != deque.end() && *b_it < tmp; b_it++);
+        for (b_it = deque.begin(); b_it != deque.end() && *b_it < tmp; b_it++)
+            ;
 		deque.insert(b_it, tmp);
     }
     

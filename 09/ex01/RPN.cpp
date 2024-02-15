@@ -31,6 +31,8 @@ void RPN(char *input){
     std::stack<long> stack;
 
     for (int i = 0; input[i]; i++){
+        if ( stack.size() >= 1 && (stack.top() > INT_MAX || stack.top() < INT_MIN))
+            throw std::runtime_error("Int Max or Min reached.");
         if(input[i] == ' ')
             continue;
         if(input[i + 1] && input[i + 1] != ' ')
@@ -44,7 +46,6 @@ void RPN(char *input){
             calc(stack, input[i]);
             continue;
         }
-        std::cout << input[i] << std::endl;
         throw std::runtime_error("Invalid Chars.");
     }
     if (stack.size() != 1)

@@ -5,5 +5,6 @@
 #include <string>
 #include <stack>
 #include <cstdlib>
+#include <climits>
 void RPN(char *input);
 #endif

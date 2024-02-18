@@ -88,7 +88,7 @@ void checkLine(std::string line){
 	i = line.find('-', i) + 1;
 	int Day = atoi(line.substr(i, line.find(' ')).c_str());
 	i = line.find(' ', i) + 3;
-	double Value = atol(line.substr(i).c_str());
+	double Value = strtod(line.substr(i).c_str(), NULL);
 	
 	if (Value > 1000 || Value < 0){
 		error = "Error: A valid value must be between 0 and 1000 => " + line;

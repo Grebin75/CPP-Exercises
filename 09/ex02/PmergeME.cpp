@@ -1,5 +1,15 @@
 #include "PmergeME.hpp"
 
+bool isSorted(std::vector<int> &vec){
+    std::vector<int>::iterator it = vec.begin();
+    int tmp = *it;
+    for(it + 1; it != vec.end(); it++){
+        if (tmp > *it) return false;
+        tmp = *it;
+    }
+    return true;
+}
+
 void fillArgs(char **av, std::vector<int> &vec, std::deque<int> &deque){
     for (int i = 1; av[i]; i++){
         if (av[i][0] == ' ')
@@ -19,6 +29,9 @@ void fillArgs(char **av, std::vector<int> &vec, std::deque<int> &deque){
                 throw std::runtime_error("Duplicated numbers.");
         }
     }
+
+    if (isSorted(vec))
+        throw std::runtime_error("The input is already sorted.");
 }
 
 void printVec(std::vector<int> &vec){
